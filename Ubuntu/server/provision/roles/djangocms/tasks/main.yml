@@ -1,0 +1,23 @@
+---
+
+- name: Latest version of pip will be present.
+  apt: name=python-pip state=latest
+  become: yes
+  become_method: sudo
+
+- name: VirtualEnv package will be present (for Django CMS)
+  pip: name=virtualenv state=present
+  become: yes
+  become_method: sudo
+
+- name: Ensure a VirtualEnv exists.
+  command: virtualenv projectenv chdir=/home/vagrant
+
+- name: Django CMS Installer will be present in the VirtualEnv.
+  pip: name=djangocms-installer state=present virtualenv={{ virt_env }}
+
+- name: Dependencies for Pillow will be present.
+  apt: name={{ item }}
+  with_items: [python-dev, libjpeg8-dev, libtiff5-dev, libfreetype6-dev, zlib1g-dev]
+  become: yes
+  become_method: sudo

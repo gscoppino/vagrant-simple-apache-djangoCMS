@@ -1,0 +1,12 @@
+---
+
+- name: Apache and Python WSGI will be present.
+  yum: name={{ item }} state=present
+  with_items: [httpd, mod_wsgi]
+  become: yes
+  become_method: sudo
+
+- name: VirtualHost will be configured.
+  copy: src=virtualhost.conf dest=/etc/httpd/conf.d/virtualhost.conf
+  become: yes
+  become_method: sudo
