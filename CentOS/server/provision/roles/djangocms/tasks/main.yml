@@ -13,7 +13,15 @@
 - name: Ensure a VirtualEnv exists.
   command: virtualenv projectenv chdir=/home/vagrant
 
-- name: Django CMS Installer will be present.
+- name: Add the Apache user to the vagrant users group.
+  command: usermod -a -G vagrant apache
+  become: yes
+  become_method: sudo
+
+- name: Give Apache execute permissions for VirtualEnv.
+  command: chmod 710 /home/vagrant
+
+- name: Django CMS Installer will be present in the VirtualEnv.
   pip: name=djangocms-installer state=present virtualenv={{ virt_env }}
 
 - name: Dependencies for Pillow will be present.
