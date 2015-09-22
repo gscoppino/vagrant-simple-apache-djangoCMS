@@ -1,0 +1,31 @@
+---
+
+- name: Latest version of pip will be present.
+  yum: name=python-pip state=latest
+  become: yes
+  become_method: sudo
+
+- name: Python virtualenv package will be present.
+  pip: name=virtualenv state=present
+  become: yes
+  become_method: sudo
+
+- name: A virtualenv wil exist.
+  command: virtualenv project_env chdir=/home/vagrant
+
+- name: Add the Apache user to the vagrant users group.
+  command: usermod -a -G vagrant apache
+  become: yes
+  become_method: sudo
+
+- name: Give Apache execute permissions for VirtualEnv.
+  command: chmod 710 /home/vagrant
+
+- name: Django CMS Installer will be present in the VirtualEnv.
+  pip: name=djangocms-installer state=present virtualenv={{ backend_env }}
+
+- name: Dependencies for Pillow will be present.
+  yum: name={{ item }}
+  with_items: [gcc, python-devel, libjpeg-devel, libpng-devel, libtiff-devel, freetype-devel, zlib-devel]
+  become: yes
+  become_method: sudo

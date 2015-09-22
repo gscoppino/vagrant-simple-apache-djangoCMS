@@ -1,38 +1,23 @@
 ---
 
 - hosts: all
-  vars:
-    virt_env: /home/vagrant/projectenv
   remote_user: vagrant
-
-  pre_tasks:
-
-    - stat: path=/vagrant/backend/manage.py
-      register: project
-
-    - stat: path=/vagrant/backend/requirements.txt
-      register: reqs
 
   roles:
 
-    - apache
-    - djangocms
-    - { role: djangocms_init, when: project.stat.exists is not defined or project.stat.exists == False }
+    - apache-server
+    - djangocms-app
+    - djangocms-app_init
 
   tasks:
 
-    - name: A project requirements file will exist.
-      command: touch requirements.txt chdir=/vagrant/backend
-      when: reqs.stat.exists is not defined or reqs.stat.exists == False
+    - name: Pretend there's something else to do.
+      yum: name=sl
+      become: yes
+      become_method: sudo
 
-    - name: Project requirements will be installed.
-      pip: requirements=/vagrant/backend/requirements.txt virtualenv={{ virt_env }}
-
-    - name: Project schema will be applied to the database engine.
-      shell: . {{ virt_env }}/bin/activate && python manage.py migrate chdir=/vagrant/backend
-
-    - name: Project static files will be collected.
-      shell: . {{ virt_env }}/bin/activate && python manage.py collectstatic --noinput chdir=/vagrant/backend
+    - name: Have A Good One!
+      command: sl
 
   post_tasks:
 

@@ -1,0 +1,35 @@
+---
+
+- stat: path={{ backend }}/manage.py
+  register: project
+
+- stat: path={{ backend }}/requirements.txt
+  register: project_requirements
+
+- name: A project will exist.
+  shell: . {{ backend_env }}/bin/activate && djangocms -p . project -s
+            --django-version=1.8
+            --cms-version=3.1
+            --i18n=yes
+            --languages=en
+            --use-tz=yes
+            --db=sqlite:///{{ backend }}/project.db
+            --permissions=yes
+            --reversion=yes
+            --bootstrap=yes
+            --starting-page=yes
+            --no-input chdir={{ backend }}
+  when: project.stat.exists is not defined or project.stat.exists == False
+
+- name: A project requirements file will exist.
+  shell: . {{ backend_env}}/bin/activate && pip freeze > requirements.txt chdir={{ backend }}
+  when: project_requirements.stat.exists is not defined or project_requirements.stat.exists == False
+
+- name: Project requirements will be installed.
+  pip: requirements={{ backend }}/requirements.txt virtualenv={{ backend_env }}
+
+- name: Project schema will be applied to the database engine.
+  shell: . {{ backend_env }}/bin/activate && python manage.py migrate chdir={{ backend }}
+
+- name: Project static files will be collected.
+  shell: . {{ backend_env }}/bin/activate && python manage.py collectstatic --noinput chdir={{ backend }}
