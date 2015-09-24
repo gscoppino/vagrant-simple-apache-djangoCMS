@@ -9,16 +9,6 @@
     - djangocms-app
     - djangocms-app_init
 
-  tasks:
-
-    - name: Pretend there's something else to do.
-      yum: name=sl
-      become: yes
-      become_method: sudo
-
-    - name: Have A Good One!
-      command: sl
-
   post_tasks:
 
     - command: echo 'Good to go!'
