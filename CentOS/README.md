@@ -22,9 +22,13 @@ choose.
 
     - ```STATIC_ROOT```: Where Django will dump static files it finds via ```./ manage.py collectstatic```.
 
+### Django Admin ###
+
+    - Make sure to run ```python manage.py createsuperuser``` within the virtual environment.
+
 ## Configure the server
 
-- The VirtualHost configuration can be found server/provision/roles/apache/files. If you customize it (for example, to change the path to wsgi.py if you imported your own project or changed the project name), make sure to run ```vagrant provision```, which will copy it into the virtual machine.
+- The VirtualHost configuration can be found server/provision/roles/apache-server/files. If you customize it (for example, to change the path to wsgi.py if you imported your own project or changed the project name), make sure to run ```vagrant provision```, which will copy it into the virtual machine.
 
 ## Working with the virtual machine from outside the VM
 
