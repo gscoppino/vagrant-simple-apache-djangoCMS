@@ -8,16 +8,16 @@
 
 - name: A project will exist.
   shell: . {{ backend_env }}/bin/activate && djangocms -p . project -s
-            --django-version=1.8
-            --cms-version=3.1
+            --django-version=stable
+            --cms-version=stable
             --i18n=yes
             --languages=en
             --use-tz=yes
             --db=sqlite:///{{ backend }}/project.db
             --permissions=yes
             --reversion=yes
-            --bootstrap=yes
-            --starting-page=yes
+            --bootstrap=no
+            --starting-page=no
             --no-input chdir={{ backend }}
   when: project.stat.exists is not defined or project.stat.exists == False
 
