@@ -22,7 +22,7 @@
   when: project.stat.exists is not defined or project.stat.exists == False
 
 - name: A project requirements file will exist.
-  shell: . {{ backend_env}}/bin/activate && pip freeze > requirements.txt chdir={{ backend }}
+  shell: . {{ backend_env }}/bin/activate && pip freeze > requirements.txt chdir={{ backend }}
   when: project_requirements.stat.exists is not defined or project_requirements.stat.exists == False
 
 - name: Project requirements will be installed.
