@@ -10,7 +10,7 @@
   become: yes
   become_method: sudo
 
-- name: A virtualenv wil exist.
+- name: A virtualenv will exist.
   command: virtualenv project_env chdir=/home/vagrant
 
 - name: Add the Apache user to the vagrant users group.
