@@ -25,15 +25,12 @@ Requirements:
 Get Started:
 
 * Do a shallow clone of the repo (for speed):
-```git clone https://github.com/gscoppino/vagrant-simple-apache-djangocms --depth=1```
-* Copy either the ```Ubuntu``` or ```CentOS``` directory to the location you
+`git clone https://github.com/gscoppino/vagrant-simple-apache-django --depth=1`
+* Copy either the Ubuntu` or `CentOS` directory to the location you
 want to keep your project in, and rename the directory to whatever you like.
-* Optional: Remove/Replace/Modify the ```README```.
-* Optional: Copy in an existing project into the ```backend``` directory.
-```manage.py``` is mandatory if you want to import an existing project and
-should be directly under the ```backend``` directory.
-* This is a good time to run ```git init``` and create a ```.gitignore``` so you
-can effectively revision control your project.
+* Follow the README for your choice of VM.
+* Consider removing/replacing/modifying the `README` and initializing a new git
+repo in the folder for your project.
 
 Usage:
 
