@@ -6,8 +6,8 @@
   roles:
 
     - apache-server
+    - djangocms
     - djangocms-app
-    - djangocms-app_init
 
   post_tasks:
 
