@@ -7,13 +7,13 @@
   register: project_requirements
 
 - name: A project will exist.
-  shell: . {{ backend_env }}/bin/activate && djangocms -p . project -s
+  shell: . {{ backend_env }}/bin/activate && djangocms -p . app -s
             --django-version=stable
             --cms-version=stable
             --i18n=yes
             --languages=en
             --use-tz=yes
-            --db=sqlite:///{{ backend }}/project.db
+            --db=sqlite:///{{ backend }}/app.db
             --permissions=yes
             --reversion=yes
             --bootstrap=no
