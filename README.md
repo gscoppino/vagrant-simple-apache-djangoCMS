@@ -23,9 +23,8 @@ For now, only SQLite will work for importing.
 
 Requirements:
 
-* Vagrant 1.8.4+
-* VirtualBox 5.0.x (until [this issue](https://github.com/mitchellh/vagrant/issues/7593)
-has been resolved).
+* Vagrant 1.8.7+
+* VirtualBox 5.1.x
 
 # Get Started:
 
@@ -77,15 +76,15 @@ Helper scripts for common tasks live in `server/utils` directory.
 
 ## Project Configuration
 
-Stored in `backend/PROJECT_NAME/settings.py`.
+Stored in `server/app/PROJECT_NAME/settings.py`.
 
 ### Project Admin Configuration ###
 
 Create a superuser using `server/utils/django-admin createsuperuser`.
 Alternatively, if you wish to do this from within the VM:
 * SSH into the VM: `vagrant ssh`.
-* Activate the virtualenv: `./home/vagrant/project_env/bin/activate`.
-* Change directory to `/vagrant/backend`.
+* Activate the virtualenv: `source /home/vagrant/project_env/bin/activate`.
+* Change directory to `/vagrant/server/app`.
 * run `python manage.py createsuperuser`.
 
 ### Project Database Configuration ####
